@@ -1,6 +1,6 @@
 <script setup>
 import BreezeButton from '@/Components/Button.vue';
-import BreezeGuestLayout from '@/Layouts/Guest.vue';
+import ShopLayout from '@/Layouts/ShopLayout.vue';
 import BreezeInput from '@/Components/Input.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
@@ -18,7 +18,7 @@ const submit = () => {
 </script>
 
 <template>
-    <BreezeGuestLayout>
+    <ShopLayout>
         <Head title="Confirm Password" />
 
         <div class="mb-4 text-sm text-gray-600">
@@ -39,5 +39,5 @@ const submit = () => {
                 </BreezeButton>
             </div>
         </form>
-    </BreezeGuestLayout>
+    </ShopLayout>
 </template>
