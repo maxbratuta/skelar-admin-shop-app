@@ -1,49 +1,78 @@
-<script setup>
-import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
-
-defineProps({
-    products: Object,
-})
-</script>
-
 <template>
-    <Head title="Products" />
-
     <AdminLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Products
-            </h2>
-        </template>
+        <template #title>Products</template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <h1>Product List</h1>
+        <div class="relative">
+            <div class="flex items-center justify-between pb-4">
+                <Pagination :meta="meta"/>
+                <SearchInput :value="filters.search"/>
+            </div>
 
+            <table class="w-full text-sm text-left text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3">ID</th>
+                    <th scope="col" class="px-6 py-3">Image</th>
+                    <th scope="col" class="px-6 py-3">Name</th>
+                    <th scope="col" class="px-6 py-3">Price</th>
+                    <th scope="col" class="px-6 py-3">Description</th>
+                    <th scope="col" class="px-6 py-3">Action</th>
+                </tr>
+                </thead>
 
-                        <div class="flex flex-wrap -mx-4">
-                            <div v-for="product in products" :key="product.id" class="w-full md:w-1/2 lg:w-1/3 px-4 mb-4">
-                                <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                                    <img src="https://placehold.co/250" :alt="product.name" class="w-full">
-                                    <div class="px-6 py-4">
-                                        <div class="font-bold text-xl mb-2">{{ product.name }}</div>
-                                        <p class="text-gray-700 text-base">
-                                            {{ product.description }}
-                                        </p>
-                                    </div>
-                                    <div class="px-6 py-4">
-                                        <span class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ product.category }}</span>
-                                        <span class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">Price: {{ product.price }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <tbody>
+                <tr v-if="products.length === 0">
+                    <td colspan="6" class="px-6 py-2 text-center text-gray-500">No Products Found</td>
+                </tr>
+
+                <tr
+                    v-for="product in products"
+                    class="bg-white border-b hover:bg-gray-50"
+                >
+                    <td class="px-6 py-2">{{ product.id }}</td>
+                    <td class="px-6 py-2">
+                        <Image :src="product.image" :alt="product.name"/>
+                    </td>
+                    <td class="px-6 py-2">{{ product.name }}</td>
+                    <td class="px-6 py-2">{{ product.price }}</td>
+                    <td class="px-6 py-2" style="width: 500px;">{{ product.description }}</td>
+                    <td class="px-6 py-2">
+                        <Link
+                            :href="route('admin.web.products.show', { product: product.id })"
+                            class="font-medium text-blue-600 hover:underline"
+                        >Show</Link>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="flex items-center justify-between pt-4">
+                <Pagination :meta="meta"/>
+                <div class="relative"></div>
             </div>
         </div>
     </AdminLayout>
 </template>
+
+<script setup>
+import AdminLayout from '@/Layouts/AdminLayout.vue';
+import Pagination from '@/Components/Pagination.vue';
+import {Link} from '@inertiajs/inertia-vue3';
+import {defineProps} from 'vue'
+import Image from '@/Components/Image.vue';
+import SearchInput from '@/Components/SearchInput.vue';
+
+const props = defineProps({
+    products: {
+        type: Object,
+        default: () => ({}),
+    },
+    meta: {
+        type: Object,
+        default: () => ({}),
+    },
+    filters: {
+        type: String,
+    },
+});
+</script>

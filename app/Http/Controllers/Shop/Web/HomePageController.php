@@ -8,10 +8,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class HomePageController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
         $user = Auth::user();
 

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\Web\HomePageController;
+use App\Http\Controllers\Admin\Web\ProductPageController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Route::group([
     'namespace' => 'Admin\Web',
     'as' => 'admin.web.',
+    'middleware' => AdminMiddleware::class,
 ], function () {
-    Route::middleware([AdminMiddleware::class])->group(function () {
-        Route::get('/', [HomePageController::class, 'index'])->name('home.index');
-    });
+        # Home
+        Route::get('/', function () {
+            return Inertia::render('Admin/Dashboard');
+        })->name('dashboard.index');
 
+        # Products
+        Route::prefix('products')->group(function () {
+            Route::get('/', [ProductPageController::class, 'index'])->name('products.index');
+            Route::get('/{product}', [ProductPageController::class, 'show'])->name('products.show');
+            Route::get('/{product}/edit', [ProductPageController::class, 'edit'])->name('products.edit');
+        });
 });
 
 
@@ -35,52 +42,3 @@ Route::group([
 ], function () {
     //
 });
-
-
-//Route::get('/', function () {
-//    return Inertia::render('Home', [
-//        'canLogin' => Route::has('login'),
-//        'canRegister' => Route::has('register'),
-//        'laravelVersion' => Application::VERSION,
-//        'phpVersion' => PHP_VERSION,
-//    ]);
-//});
-//
-//Route::prefix('admin')->middleware('auth')->group(function () {
-//    Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');
-//});
-//
-//Route::middleware(['auth', 'verified'])->group(function () {
-//
-//    Route::get('/dashboard', function () {
-//        return Inertia::render('Dashboard');
-//    })->name('dashboard');
-//
-//    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-//    Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
-//
-//});
-
-//Route::get('/', function () {
-//    return Inertia::render('Home', [
-//        'canLogin' => Route::has('login'),
-//        'canRegister' => Route::has('register'),
-//        'laravelVersion' => Application::VERSION,
-//        'phpVersion' => PHP_VERSION,
-//    ]);
-//});
-//
-//Route::prefix('admin')->middleware('auth')->group(function () {
-//    Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');
-//});
-//
-//Route::middleware(['auth', 'verified'])->group(function () {
-//
-//    Route::get('/dashboard', function () {
-//        return Inertia::render('Dashboard');
-//    })->name('dashboard');
-//
-//    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-//    Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
-//
-//});
