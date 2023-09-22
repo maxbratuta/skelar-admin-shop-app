@@ -60,7 +60,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapAdminRoutes(): void
     {
         Route::prefix(env('ADMIN_PATH_PREFIX','admin'))
-            ->middleware('admin')
+            ->middleware('web') # TODO : change to 'admin' with passport TODO
             ->namespace($this->namespace)
             ->group(base_path('routes/admin.php'));
     }

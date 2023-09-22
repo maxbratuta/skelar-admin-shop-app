@@ -14,13 +14,11 @@ class HomePageController extends Controller
 {
     public function index(): Response
     {
-        $user = Auth::user();
-
         $products = Product::all(); # TODO : change to pagination
 
         return Inertia::render('Shop/Home', [
-            'isAuthenticated' => $user ?? false,
-            'isAdmin' => User::isAdmin($user),
+            'isAuthenticated' => Auth::check(),
+            'isAdmin' => User::isAdmin(Auth::user()),
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'products' => $products,
