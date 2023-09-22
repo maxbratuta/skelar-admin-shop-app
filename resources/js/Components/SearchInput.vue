@@ -29,8 +29,8 @@
 
 
 <script setup>
-import {ref, watch, defineProps} from 'vue'
-import {Inertia} from '@inertiajs/inertia';
+import { ref, watch, defineProps } from 'vue'
+import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
     search: {

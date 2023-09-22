@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductResourceCollection;
 use App\Models\Product;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -47,10 +49,5 @@ class ProductPageController extends Controller
         return Inertia::render('Admin/Product/Edit', [
             'product' => (new ProductResource($product))->toArray($request)
         ]);
-    }
-
-    public function update()
-    {
-        //
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\API\ProductController;
 use App\Http\Controllers\Admin\Web\ProductPageController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,13 @@ Route::group([
     'namespace' => 'Admin\API',
     'prefix' => 'api',
     'as' => 'admin.api.',
+    'middleware' => AdminMiddleware::class,
 ], function () {
-    //
+    # v1
+    Route::prefix('v1')->group(function () {
+        # Products
+        Route::prefix('products')->group(function () {
+            Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
+        });
+    });
 });

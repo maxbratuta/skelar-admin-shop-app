@@ -57,8 +57,8 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Pagination from '@/Components/Pagination.vue';
-import {Link} from '@inertiajs/inertia-vue3';
-import {defineProps} from 'vue'
+import { Link } from '@inertiajs/inertia-vue3';
+import { defineProps } from 'vue'
 import Image from '@/Components/Image.vue';
 import SearchInput from '@/Components/SearchInput.vue';
 

@@ -55,8 +55,8 @@
 
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import {defineProps} from 'vue'
-import {Link} from '@inertiajs/inertia-vue3'
+import { defineProps } from 'vue'
+import { Link } from '@inertiajs/inertia-vue3'
 import Image from '@/Components/Image.vue';
 
 const props = defineProps({

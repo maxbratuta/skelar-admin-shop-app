@@ -111,8 +111,8 @@
 </template>
 
 <script setup>
-import {ref, watch, computed, defineProps} from 'vue';
-import {Inertia} from '@inertiajs/inertia';
+import { ref, watch, computed, defineProps } from 'vue';
+import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
     meta: {
