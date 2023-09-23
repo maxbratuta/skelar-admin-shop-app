@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\API\ProductController;
+use App\Http\Controllers\Admin\Web\DashboardController;
 use App\Http\Controllers\Admin\Web\ProductPageController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +20,10 @@ use Inertia\Inertia;
 Route::group([
     'namespace' => 'Admin\Web',
     'as' => 'admin.web.',
-    'middleware' => AdminMiddleware::class,
+    'middleware' => [AdminMiddleware::class],
 ], function () {
-        # Home
-        Route::get('/', function () {
-            return Inertia::render('Admin/Dashboard');
-        })->name('dashboard.index');
+        # Dashboard
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
         # Products
         Route::prefix('products')->group(function () {
@@ -37,16 +35,13 @@ Route::group([
 
 
 Route::group([
-    'namespace' => 'Admin\API',
-    'prefix' => 'api',
+    'namespace' => 'Admin\API\v1',
+    'prefix' => 'api/v1',
     'as' => 'admin.api.',
-    'middleware' => AdminMiddleware::class,
+    'middleware' => [AdminMiddleware::class],
 ], function () {
-    # v1
-    Route::prefix('v1')->group(function () {
-        # Products
-        Route::prefix('products')->group(function () {
-            Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
-        });
+    # Products
+    Route::prefix('products')->group(function () {
+        Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
     });
 });

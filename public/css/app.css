@@ -787,6 +787,12 @@ select {
 .h-9 {
   height: 2.25rem;
 }
+.h-2 {
+  height: 0.5rem;
+}
+.h-10 {
+  height: 2.5rem;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -816,6 +822,13 @@ select {
 }
 .w-full {
   width: 100%;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .max-w-6xl {
   max-width: 72rem;
@@ -997,6 +1010,14 @@ select {
 .bg-gray-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+.bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+}
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 .p-2 {
   padding: 0.5rem;

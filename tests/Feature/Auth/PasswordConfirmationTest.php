@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Infrastructure\Persistence\Eloquent\Models\User;
 use Tests\TestCase;
 
 class PasswordConfirmationTest extends TestCase

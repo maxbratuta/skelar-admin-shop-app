@@ -10,7 +10,7 @@
                 :disabled="noPreviousPage"
                 :class="{'opacity-50': noPreviousPage}"
                 @click="loadPage(1)"
-                class="inline-flex justify-center items-center w-11 h-11 text-gray-700 bg-white rounded border
+                class="inline-flex justify-center items-center w-10 h-10 text-gray-700 bg-white rounded border
                        border-gray-200 shadow-sm outline-none hover:bg-gray-50 lg:h-9 lg:w-9 lg:text-sm focus:ring-1
                        focus:ring-blue-500 focus:border-blue-500"
             >
@@ -33,7 +33,7 @@
                 :disabled="noPreviousPage"
                 :class="{'opacity-50': noPreviousPage}"
                 @click="loadPage(meta.current_page - 1)"
-                class="inline-flex justify-center items-center w-11 h-11 text-gray-700 bg-white rounded border
+                class="inline-flex justify-center items-center w-10 h-10 text-gray-700 bg-white rounded border
                        border-gray-200 shadow-sm outline-none hover:bg-gray-50 lg:h-9 lg:w-9 focus:ring-1
                        focus:ring-blue-500 focus:border-blue-500"
             >
@@ -53,7 +53,7 @@
                     type="text"
                     @keydown.enter="loadPage(page)"
                     v-model="page"
-                    class="px-2 w-11 h-11 text-center rounded border border-gray-400 shadow-sm lg:h-9 lg:w-9 lg:text-sm
+                    class="px-2 w-10 h-10 text-center rounded border border-gray-400 shadow-sm lg:h-9 lg:w-9 lg:text-sm
                            focus:ring-blue-500 focus:border-blue-500"
                 />
                 <div class="px-2 text-gray-600 lg:text-sm">of {{ meta.last_page }}</div>
@@ -63,7 +63,7 @@
                 :disabled="noNextPage"
                 :class="{'opacity-50': noNextPage}"
                 @click="loadPage(meta.current_page + 1)"
-                class="inline-flex justify-center items-center w-11 h-11 text-gray-700 bg-white rounded border
+                class="inline-flex justify-center items-center w-10 h-10 text-gray-700 bg-white rounded border
                        border-gray-300 shadow-sm outline-none hover:bg-gray-50 lg:h-9 lg:w-9 focus:ring-1
                        focus:ring-blue-500 focus:border-blue-500"
             >
@@ -87,7 +87,7 @@
                 :disabled="noNextPage"
                 :class="{'opacity-50': noNextPage}"
                 @click="loadPage(meta.last_page)"
-                class="inline-flex justify-center items-center w-11 h-11 text-gray-700 bg-white rounded border
+                class="inline-flex justify-center items-center w-10 h-10 text-gray-700 bg-white rounded border
                        border-gray-300 shadow-sm outline-none hover:bg-gray-50 lg:h-9 lg:w-9 focus:ring-1
                        focus:ring-blue-500 focus:border-blue-500"
             >

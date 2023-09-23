@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
+use Infrastructure\Persistence\Eloquent\Models\User;
 
 class AdminMiddleware
 {

@@ -1,11 +1,15 @@
 <template>
-    <AdminLayout>
+    <AdminLayout :auth="auth">
         <template #title>Products</template>
 
         <div class="relative">
             <div class="flex items-center justify-between pb-4">
                 <Pagination :meta="meta"/>
-                <SearchInput :value="filters.search"/>
+                <SearchInput
+                    :value="filters.search_value"
+                    :routeName="'admin.web.products.index'"
+                    @update:value="value => filters.search_value = value"
+                />
             </div>
 
             <table class="w-full text-sm text-left text-gray-500">
@@ -22,7 +26,10 @@
 
                 <tbody>
                 <tr v-if="products.length === 0">
-                    <td colspan="6" class="px-6 py-2 text-center text-gray-500">No Products Found</td>
+                    <td
+                        colspan="6"
+                        class="px-6 py-2 text-center text-gray-500"
+                    >No Products Found</td>
                 </tr>
 
                 <tr
@@ -35,7 +42,10 @@
                     </td>
                     <td class="px-6 py-2">{{ product.name }}</td>
                     <td class="px-6 py-2">{{ product.price }}</td>
-                    <td class="px-6 py-2" style="width: 500px;">{{ product.description }}</td>
+                    <td
+                        class="px-6 py-2"
+                        style="width: 500px;"
+                    >{{ product.description }}</td>
                     <td class="px-6 py-2">
                         <Link
                             :href="route('admin.web.products.show', { product: product.id })"
@@ -62,17 +72,38 @@ import { defineProps } from 'vue'
 import Image from '@/Components/Image.vue';
 import SearchInput from '@/Components/SearchInput.vue';
 
-const props = defineProps({
+const { auth, products, filters, meta } = defineProps({
+    auth: {
+        type: Object,
+        default: () => ({
+            user: null
+        }),
+    },
     products: {
         type: Object,
-        default: () => ({}),
+        default: () => ({
+            id: 0,
+            name: '',
+            image: '',
+            price: 0,
+            description: '',
+            created_at: '',
+            updated_at: '',
+        }),
+    },
+    filters: {
+        type: Object,
+        default: () => ({
+            search_value: '',
+        }),
     },
     meta: {
         type: Object,
-        default: () => ({}),
-    },
-    filters: {
-        type: String,
+        default: () => ({
+            total: 0,
+            current_page: 1,
+            last_page: 1,
+        }),
     },
 });
 </script>

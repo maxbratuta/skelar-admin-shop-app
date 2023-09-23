@@ -19,7 +19,7 @@
         <input
             type="text"
             id="table-search"
-            v-model="search"
+            v-model="internalValue"
             class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80
                    bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Search for items"
@@ -27,29 +27,33 @@
     </div>
 </template>
 
-
 <script setup>
-import { ref, watch, defineProps } from 'vue'
+import { ref, watch, defineProps, defineEmits } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
-    search: {
-        type: String,
+    value: String,
+    routeName: String,
+    searchParams: {
+        type: Object,
+        default: () => ({}),
     },
 });
 
-let search = ref(props.search);
+const emits = defineEmits(['update:value']);
 
-watch(search, (value) => {
+let internalValue = ref(props.value || '');
+
+watch(internalValue, (newValue) => {
+    emits('update:value', newValue);
     Inertia.get(
-        route('admin.web.products.index'),
+        route(props.routeName),
         {
-            search: value
+            search: newValue,
+            ...props.searchParams
         },
-        {
-            preserveState: true,
-            replace: true,
-        }
+        { preserveState: true, replace: true }
     );
 });
+
 </script>

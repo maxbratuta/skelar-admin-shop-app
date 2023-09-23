@@ -1,5 +1,5 @@
 <template>
-    <AdminLayout>
+    <AdminLayout :auth="auth">
         <template #title>Dashboard</template>
 
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -12,4 +12,15 @@
 
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import { defineProps } from 'vue';
+
+const { auth } = defineProps({
+    auth: {
+        type: Object,
+        default: () => ({
+            user: null,
+        }),
+    }
+});
+
 </script>

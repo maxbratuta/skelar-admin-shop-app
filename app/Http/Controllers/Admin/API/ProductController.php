@@ -2,41 +2,22 @@
 
 namespace App\Http\Controllers\Admin\API;
 
-use App\Models\Product;
-use Exception;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Product\ProductUpdateRequest;
+use App\Responses\BaseApiResponse;
+use Domain\Services\ProductService;
+use Infrastructure\Persistence\Eloquent\Models\Product;
 
-class ProductController
+class ProductController extends BaseController
 {
-    public function update(Request $request, Product $product): JsonResponse
+    public function __construct(private ProductService $productService)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'nullable|string',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-        ]);
+        parent::__construct();
+    }
 
-        try {
-            $product->update([
-                'name' => $request->input('name'),
-                'image' => $request->input('image'),
-                'price' => $request->input('price'),
-                'description' => $request->input('description'),
-            ]);
+    public function update(ProductUpdateRequest $request, Product $product): BaseApiResponse
+    {
+        $this->productService->update($request->validated(), $product);
 
-            return response()->json([
-                'status' => true,
-                'data' => [],
-                'message' => 'The product has been updated successfully'
-            ]);
-        } catch (Exception $e) { # TODO : ProductUpdateException
-            return response()->json([
-                    'status' => true,
-                    'errors' => [],
-                    'message' => 'Failed to update product. Try again.'
-            ], 500);
-        }
+        return $this->response->data([], 'The product has been updated successfully.');
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <AdminLayout>
+    <AdminLayout :auth="auth">
         <template #title>Product Page</template>
 
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -7,8 +7,15 @@
                 <table class="w-full text-left">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-4 py-2 text-right">Title</th>
-                        <th scope="col" class="px-4 py-2">Value</th>
+                        <th
+                            scope="col"
+                            class="px-4 py-2 text-right"
+                            style="width: 150px;"
+                        >Title</th>
+                        <th
+                            scope="col"
+                            class="px-4 py-2"
+                        >Value</th>
                     </tr>
 
                     </thead>
@@ -24,7 +31,10 @@
                     <tr class="bg-white border-b hover:bg-gray-50">
                         <td class="px-4 py-2 text-right">Image:</td>
                         <td class="px-4 py-2">
-                            <Image :src="product.image" :alt="product.name"/>
+                            <Image
+                                :src="product.image"
+                                :alt="product.name"
+                            />
                         </td>
                     </tr>
                     <tr class="bg-white border-b hover:bg-gray-50">
@@ -34,6 +44,14 @@
                     <tr class="bg-white border-b hover:bg-gray-50">
                         <td class="px-4 py-2 text-right">Description:</td>
                         <td class="px-4 py-2">{{ product.description }}</td>
+                    </tr>
+                    <tr class="bg-white border-b hover:bg-gray-50">
+                        <td class="px-4 py-2 text-right">Created At:</td>
+                        <td class="px-4 py-2">{{ product.created_at }}</td>
+                    </tr>
+                    <tr class="bg-white border-b hover:bg-gray-50">
+                        <td class="px-4 py-2 text-right">Updated At:</td>
+                        <td class="px-4 py-2">{{ product.updated_at }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -49,7 +67,6 @@
                 </div>
             </div>
         </div>
-
     </AdminLayout>
 </template>
 
@@ -59,10 +76,24 @@ import { defineProps } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import Image from '@/Components/Image.vue';
 
-const props = defineProps({
+const { auth, product } = defineProps({
+    auth: {
+        type: Object,
+        default: () => ({
+            user: null
+        }),
+    },
     product: {
         type: Object,
-        default: () => ({}),
+        default: () => ({
+            id: 0,
+            name: '',
+            image: '',
+            price: 0,
+            description: '',
+            created_at: '',
+            updated_at: ''
+        }),
     },
 });
 </script>

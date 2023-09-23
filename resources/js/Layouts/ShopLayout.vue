@@ -16,23 +16,27 @@
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <BreezeNavLink
                                 :href="route('shop.web.home.index')"
-                                :active="route().current('shop.web.home.index')">
-                                Home
-                            </BreezeNavLink>
+                                :active="route().current('shop.web.home.index')"
+                            >Home</BreezeNavLink>
 
                             <BreezeNavLink
-                                v-if="isAdmin"
+                                v-if="auth.isAdmin"
                                 :href="route('admin.web.dashboard.index')"
-                                :active="route().current('admin.web.dashboard.index')">
-                                Back Office
-                            </BreezeNavLink>
+                                :active="route().current('admin.web.dashboard.index')"
+                            >Back Office</BreezeNavLink>
                         </div>
                     </div>
 
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <!-- Settings Dropdown -->
-                        <div v-if="isAuthenticated" class="ml-3 relative">
-                            <BreezeDropdown align="right" width="48">
+                        <div
+                            v-if="auth.isAuthenticated"
+                            class="ml-3 relative"
+                        >
+                            <BreezeDropdown
+                                align="right"
+                                width="48"
+                            >
                                 <template #trigger>
                                     <span class="inline-flex rounded-md">
                                         <button
@@ -42,13 +46,20 @@
                                                    hover:text-gray-700 focus:outline-none transition ease-in-out
                                                    duration-150"
                                         >
-                                            {{ $page.props.auth.user.name }}
+                                            {{ auth.user?.name }}
 
-                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                                 viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                      clip-rule="evenodd"/>
+                                            <svg
+                                                class="ml-2 -mr-0.5 h-4 w-4"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0
+                                                       111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"
+                                                />
                                             </svg>
                                         </button>
                                     </span>
@@ -71,7 +82,7 @@
                             >Log in</Link>
 
                             <Link
-                                v-if="canRegister"
+                                v-if="auth.canRegister"
                                 :href="route('register')"
                                 class="ml-4 text-sm text-gray-700 underline"
                             >Register</Link>
@@ -130,10 +141,10 @@
 
                 <!-- Responsive Settings Options -->
                 <div class="pt-4 pb-1 border-t border-gray-200">
-                    <template v-if="isAuthenticated">
+                    <template v-if="auth.isAuthenticated">
                         <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">{{ $page.props.auth.user.name }}</div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
+                            <div class="font-medium text-base text-gray-800">{{ auth.user?.name }}</div>
+                            <div class="font-medium text-sm text-gray-500">{{ auth.user?.email }}</div>
                         </div>
 
                         <div class="mt-3 space-y-1">
@@ -175,13 +186,20 @@ import BreezeDropdownLink from '@/Components/DropdownLink.vue';
 import BreezeNavLink from '@/Components/NavLink.vue';
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/inertia-vue3';
+import { defineProps } from 'vue';
 
 const showingNavigationDropdown = ref(false);
 
-defineProps({
-    canLogin: Boolean,
-    canRegister: Boolean,
-    isAuthenticated: Boolean,
-    isAdmin: Boolean
-})
+const { auth } = defineProps({
+    auth: {
+        type: Object,
+        default: () => ({
+            canLogin: false,
+            canRegister: false,
+            isAuthenticated: false,
+            isAdmin: false,
+            user: null,
+        }),
+    },
+});
 </script>
