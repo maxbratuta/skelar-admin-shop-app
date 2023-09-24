@@ -4,7 +4,6 @@ namespace Infrastructure\Persistence\Eloquent\Repositories;
 
 use App\Exceptions\Admin\ProductException;
 use Domain\Repositories\ProductRepository as ProductRepositoryInterface;
-use Domain\Services\ProductService;
 use Exception;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +11,7 @@ use Infrastructure\Persistence\Eloquent\Models\Product;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    public function getAll(string $searchValue = null, array $columns = ['*']): AbstractPaginator
+    public function getAll(?string $searchValue, int $perPage, array $columns = ['*']): AbstractPaginator
     {
         $query = Product::query();
 
@@ -22,7 +21,7 @@ class ProductRepository implements ProductRepositoryInterface
                 ->orWhere('price', 'like', '%' . $searchValue . '%');
         }
 
-        return $query->paginate(ProductService::MAX_PRODUCTS_COUNT_PER_PAGE, $columns)
+        return $query->paginate($perPage, $columns)
             ->withQueryString();
     }
 

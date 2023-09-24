@@ -27,8 +27,8 @@ class AuthResource extends JsonResource
     {
         return [
             'auth' => array_merge([
-                'canLogin' => $this->resource['canLogin'] ?? false,
-                'canRegister' => $this->resource['canRegister'] ?? false,
+                'can_login' => $this->resource['can_login'] ?? false,
+                'can_register' => $this->resource['can_register'] ?? false,
             ], $this->authService->getData())
         ];
     }

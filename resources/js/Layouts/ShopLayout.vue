@@ -20,7 +20,7 @@
                             >Home</BreezeNavLink>
 
                             <BreezeNavLink
-                                v-if="auth.isAdmin"
+                                v-if="auth.is_admin"
                                 :href="route('admin.web.dashboard.index')"
                                 :active="route().current('admin.web.dashboard.index')"
                             >Back Office</BreezeNavLink>
@@ -30,7 +30,7 @@
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <!-- Settings Dropdown -->
                         <div
-                            v-if="auth.isAuthenticated"
+                            v-if="auth.is_authenticated"
                             class="ml-3 relative"
                         >
                             <BreezeDropdown
@@ -82,7 +82,7 @@
                             >Log in</Link>
 
                             <Link
-                                v-if="auth.canRegister"
+                                v-if="auth.can_register"
                                 :href="route('register')"
                                 class="ml-4 text-sm text-gray-700 underline"
                             >Register</Link>
@@ -141,7 +141,7 @@
 
                 <!-- Responsive Settings Options -->
                 <div class="pt-4 pb-1 border-t border-gray-200">
-                    <template v-if="auth.isAuthenticated">
+                    <template v-if="auth.is_authenticated">
                         <div class="px-4">
                             <div class="font-medium text-base text-gray-800">{{ auth.user?.name }}</div>
                             <div class="font-medium text-sm text-gray-500">{{ auth.user?.email }}</div>
@@ -171,8 +171,18 @@
             </div>
         </nav>
 
+        <!-- Page Title -->
+        <div
+            v-if="$slots.title"
+            class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8"
+        >
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <slot name="title" />
+            </h2>
+        </div>
+
         <!-- Page Content -->
-        <main class="max-w-6xl mx-auto sm:px-6 lg:px-8 pt-8">
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <slot/>
         </main>
 </div>
@@ -194,10 +204,10 @@ const { auth } = defineProps({
     auth: {
         type: Object,
         default: () => ({
-            canLogin: false,
-            canRegister: false,
-            isAuthenticated: false,
-            isAdmin: false,
+            can_login: false,
+            can_register: false,
+            is_authenticated: false,
+            is_admin: false,
             user: null,
         }),
     },

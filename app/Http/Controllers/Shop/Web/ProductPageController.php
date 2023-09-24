@@ -5,29 +5,21 @@ namespace App\Http\Controllers\Shop\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Auth\AuthResource;
 use App\Http\Resources\FilterResource;
-use App\Http\Resources\PaginatorResource;
-use App\Http\Resources\Shop\Product\ProductResourceCollection;
-use Domain\Services\ProductService;
+use App\Http\Resources\Shop\Product\ProductResource;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use Infrastructure\Persistence\Eloquent\Models\Product;
 
-class HomePageController extends Controller
+class ProductPageController extends Controller
 {
-    public function __construct(private ProductService $productService) {}
-
     /**
      * @throws BindingResolutionException
      */
-    public function index(Request $request): Response
+    public function show(Request $request, Product $product): Response
     {
-        $products = $this->productService->getAll(
-            $request->input('search'),
-            $request->input('per_page')
-        );
-
         $authResource = (new AuthResource([
             'can_login' => Route::has('login'),
             'can_register' => Route::has('register'),
@@ -36,10 +28,9 @@ class HomePageController extends Controller
         $filter = (new FilterResource())->toArray();
 
         $response = array_merge([
-            'products' => (new ProductResourceCollection($products))->toArray($request),
-            'meta' => (new PaginatorResource($products))->toArray(),
+            'product' => (new ProductResource(Product::findOrFail($product->id)))->toArray($request),
         ], $authResource, $filter);
 
-        return Inertia::render('Shop/Home', $response);
+        return Inertia::render('Shop/Product/Show', $response);
     }
 }

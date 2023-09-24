@@ -28,32 +28,28 @@
 </template>
 
 <script setup>
-import { ref, watch, defineProps, defineEmits } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
+import { ref, watch, defineProps, onMounted } from 'vue';
+import { debounce } from 'lodash';
 
 const props = defineProps({
     value: String,
-    routeName: String,
-    searchParams: {
-        type: Object,
-        default: () => ({}),
-    },
 });
 
 const emits = defineEmits(['update:value']);
 
 let internalValue = ref(props.value || '');
 
-watch(internalValue, (newValue) => {
+const searchWithDebounce = debounce((newValue) => {
     emits('update:value', newValue);
-    Inertia.get(
-        route(props.routeName),
-        {
-            search: newValue,
-            ...props.searchParams
-        },
-        { preserveState: true, replace: true }
-    );
+}, 500);
+
+onMounted(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    internalValue.value = urlParams.get('search') || '';
 });
 
+watch(internalValue, (newValue) => {
+    searchWithDebounce(newValue);
+});
 </script>

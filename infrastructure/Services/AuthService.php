@@ -13,8 +13,8 @@ class AuthService
         $user = Auth::user();
 
         return array_merge([
-            'isAuthenticated' => Auth::check(),
-            'isAdmin' => User::isAdmin($user)
+            'is_authenticated' => Auth::check(),
+            'is_admin' => User::isAdmin($user)
         ], $this->getUserData($user));
     }
 

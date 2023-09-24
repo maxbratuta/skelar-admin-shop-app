@@ -23,7 +23,6 @@ class PaginatorResource extends JsonResource
             'current_page' => $this->resource->currentPage(),
             'last_page' => $this->resource->lastPage(),
             'per_page' => $this->resource->perPage(),
-            'options' => $this->resource->getOptions()
         ];
     }
 }

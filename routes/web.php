@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Shop\Web\HomePageController;
+use App\Http\Controllers\Shop\Web\ProductPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,11 @@ Route::group([
 ], function () {
     // Home Page
     Route::get('/', [HomePageController::class, 'index'])->name('home.index');
+
+    # Products
+    Route::prefix('products')->group(function () {
+        Route::get('/{product}', [ProductPageController::class, 'show'])->name('products.show');
+    });
 });
 
 

@@ -12,9 +12,9 @@ class ProductService
 
     public function __construct(protected ProductRepository $productRepository) {}
 
-    public function getAll(string $searchValue = null): AbstractPaginator
+    public function getAll(?string $searchValue = null, ?int $perPage = null): AbstractPaginator
     {
-        return $this->productRepository->getAll($searchValue);
+        return $this->productRepository->getAll($searchValue, $perPage ?? self::MAX_PRODUCTS_COUNT_PER_PAGE);
     }
 
     public function update(array $data, Product $record): Product

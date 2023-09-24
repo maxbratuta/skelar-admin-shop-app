@@ -1,5 +1,5 @@
 <template>
-    <AdminLayout :auth="auth">
+    <ShopLayout :auth="auth">
         <template #title>Product Page</template>
 
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -46,35 +46,16 @@
                         <td class="px-4 py-2 text-right">Description:</td>
                         <td class="px-4 py-2">{{ product.description }}</td>
                     </tr>
-                    <tr class="bg-white border-b hover:bg-gray-50">
-                        <td class="px-4 py-2 text-right">Created At:</td>
-                        <td class="px-4 py-2">{{ product.created_at }}</td>
-                    </tr>
-                    <tr class="bg-white border-b hover:bg-gray-50">
-                        <td class="px-4 py-2 text-right">Updated At:</td>
-                        <td class="px-4 py-2">{{ product.updated_at }}</td>
-                    </tr>
                     </tbody>
                 </table>
-
-                <div class="pt-8 flex justify-end">
-                    <Link
-                        :href="route('admin.web.products.edit', { product: product.id })"
-                        class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent
-                               rounded-md font-semibold text-xs text-white uppercase tracking-widest
-                               hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900
-                               focus:shadow-outline-gray"
-                    >Edit</Link>
-                </div>
             </div>
         </div>
-    </AdminLayout>
+    </ShopLayout>
 </template>
 
 <script setup>
-import AdminLayout from '@/Layouts/AdminLayout.vue';
+import ShopLayout from '@/Layouts/ShopLayout.vue';
 import { defineProps } from 'vue'
-import { Link } from '@inertiajs/inertia-vue3'
 import Image from '@/Components/Image.vue';
 
 const { auth, product } = defineProps({
@@ -82,13 +63,10 @@ const { auth, product } = defineProps({
     product: {
         type: Object,
         default: () => ({
-            id: 0,
             name: '',
             image: '',
             price: 0,
             description: '',
-            created_at: '',
-            updated_at: ''
         }),
     },
 });

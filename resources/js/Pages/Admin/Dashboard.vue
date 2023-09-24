@@ -15,12 +15,7 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { defineProps } from 'vue';
 
 const { auth } = defineProps({
-    auth: {
-        type: Object,
-        default: () => ({
-            user: null,
-        }),
-    }
+    auth: Object,
 });
 
 </script>

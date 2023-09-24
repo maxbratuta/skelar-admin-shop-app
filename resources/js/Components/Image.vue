@@ -1,7 +1,7 @@
 <template>
     <img
         class="rounded-lg bg-gray-300"
-        style="width: 100px; height: 100px; max-width: 100px; max-height: 100px; object-fit: fill;"
+        :style="styleObject"
         :src="imageSrc"
         :alt="alt"
     />
@@ -10,8 +10,30 @@
 <script setup>
 import { defineProps, computed } from 'vue';
 
-const { src, alt } = defineProps(['src', 'alt']);
+const { src, alt, size } = defineProps({
+    src: {
+        type: String,
+        default: '',
+    },
+    alt: {
+        type: String,
+        default: '',
+    },
+    size: {
+        type: String,
+        default: '250px',
+    },
+});
 
 const imageSrc = computed(() => src || 'https://placehold.co/250');
+
+const styleObject = computed(() => ({
+    width: size,
+    height: size,
+    maxWidth: size,
+    maxHeight: size,
+    objectFit: 'cover',
+}));
+
 </script>
 

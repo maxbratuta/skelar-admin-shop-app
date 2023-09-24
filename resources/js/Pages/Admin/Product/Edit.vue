@@ -106,12 +106,7 @@ import { Link, useForm } from '@inertiajs/inertia-vue3';
 import { defineProps, ref } from 'vue';
 
 const { product } = defineProps({
-    auth: {
-        type: Object,
-        default: () => ({
-            user: null
-        }),
-    },
+    auth: Object,
     product: {
         type: Object,
         default: () => ({
