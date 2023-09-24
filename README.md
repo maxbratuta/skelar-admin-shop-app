@@ -4,6 +4,19 @@ A demo application to illustrate working capacity of online shop with admin pane
 
 ![SKELAR Admin Shop App](https://i.ibb.co/0ZpkNkZ/skelar-admin-shop-app.png)
 
+---
+**DISCLAIMER.**
+
+The architecture of the project was developed not considering that it is a "test task", but as a really real project that needs to be built from the very beginning.
+
+In this version of the code, minimal use of DDD was involved - sufficient at this stage of development.
+
+The project has some directory structures with a .gitkeep file that have been laid out for future development.
+
+The project has a purely author's opinion about the architecture of the project and everything in it, so if you have a wish for improvement and improvement of knowledge, please let me know about it.
+
+---
+
 ## Used Libraries:
 
 - [Laravel](https://laravel.com/)
