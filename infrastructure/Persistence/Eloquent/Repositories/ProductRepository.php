@@ -11,14 +11,18 @@ use Infrastructure\Persistence\Eloquent\Models\Product;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    public function getAll(?string $searchValue, int $perPage, array $columns = ['*']): AbstractPaginator
-    {
+    public function getAll(
+        ?string $searchValue,
+        int $perPage,
+        array $searchableFields = ['*'],
+        array $columns = ['*']
+    ): AbstractPaginator {
         $query = Product::query();
 
         if ($searchValue) {
-            $query->where('name', 'like', '%' . $searchValue . '%')
-                ->orWhere('description', 'like', '%' . $searchValue . '%')
-                ->orWhere('price', 'like', '%' . $searchValue . '%');
+            foreach ($searchableFields as $field) {
+                $query->orWhere($field, 'like', '%' . $searchValue . '%');
+            }
         }
 
         return $query->paginate($perPage, $columns)

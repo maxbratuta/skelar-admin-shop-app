@@ -25,7 +25,8 @@ class HomePageController extends Controller
     {
         $products = $this->productService->getAll(
             $request->input('search'),
-            $request->input('per_page')
+            $request->input('per_page'),
+            searchableFields: ['name']
         );
 
         $authResource = (new AuthResource([

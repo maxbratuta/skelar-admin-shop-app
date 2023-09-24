@@ -25,7 +25,8 @@ class ProductPageController extends Controller
     {
         $products = $this->productService->getAll(
             $request->input('search'),
-            $request->input('per_page')
+            $request->input('per_page'),
+            searchableFields: ['id', 'name', 'price', 'description']
         );
 
         $filter = (new FilterResource())->toArray();
