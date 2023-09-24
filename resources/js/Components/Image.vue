@@ -32,7 +32,7 @@ const styleObject = computed(() => ({
     height: size,
     maxWidth: size,
     maxHeight: size,
-    objectFit: 'cover',
+    objectFit: 'contain',
 }));
 
 </script>
