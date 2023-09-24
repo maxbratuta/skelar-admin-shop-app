@@ -2,7 +2,7 @@
 
 A demo application to illustrate working capacity of online shop with admin panel with using **Laravel 8**, **Vue 3** and **Inertia.js**.
 
-![SKELAR Admin Shop App](https://i.ibb.co/dWnGsNk/skelar-admin-shop-app.png)
+![SKELAR Admin Shop App](https://i.ibb.co/0ZpkNkZ/skelar-admin-shop-app.png)
 
 ## Used Libraries:
 
