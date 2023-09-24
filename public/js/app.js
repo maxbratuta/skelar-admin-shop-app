@@ -19228,7 +19228,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     perPage: {
       type: Number,
-      "default": 5
+      "default": 10
     }
   },
   setup: function setup(__props, _ref) {

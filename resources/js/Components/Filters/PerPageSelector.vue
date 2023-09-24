@@ -20,7 +20,7 @@ const emit = defineEmits();
 const { perPage } = defineProps({
     perPage: {
         type: Number,
-        default: 5
+        default: 10
     }
 });
 

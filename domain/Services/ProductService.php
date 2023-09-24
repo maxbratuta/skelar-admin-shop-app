@@ -8,7 +8,7 @@ use Infrastructure\Persistence\Eloquent\Models\Product;
 
 class ProductService
 {
-    public const MAX_PRODUCTS_COUNT_PER_PAGE = 5;
+    public const MAX_PRODUCTS_COUNT_PER_PAGE = 10;
 
     public function __construct(protected ProductRepository $productRepository) {}
 
