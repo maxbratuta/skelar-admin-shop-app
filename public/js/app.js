@@ -19365,7 +19365,7 @@ __webpack_require__.r(__webpack_exports__);
         height: size,
         maxWidth: size,
         maxHeight: size,
-        objectFit: 'cover'
+        objectFit: 'contain'
       };
     });
     var __returned__ = {
