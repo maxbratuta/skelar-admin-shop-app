@@ -20015,7 +20015,7 @@ __webpack_require__.r(__webpack_exports__);
       description: product.description
     });
     var submit = function submit() {
-      axios.put(route('admin.api.products.update', {
+      axios.put(route('admin.api.v1.products.update', {
         product: product.id
       }), form).then(function (response) {
         message.value = response.data.message;

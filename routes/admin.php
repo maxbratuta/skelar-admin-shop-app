@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\API\ProductController;
 use App\Http\Controllers\Admin\Web\DashboardController;
 use App\Http\Controllers\Admin\Web\ProductPageController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,11 +38,15 @@ Route::group([
 Route::group([
     'namespace' => 'Admin\API\v1',
     'prefix' => 'api/v1',
-    'as' => 'admin.api.',
+    'as' => 'admin.api.v1.',
     'middleware' => [AdminMiddleware::class],
 ], function () {
     # Products
     Route::prefix('products')->group(function () {
         Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
     });
+});
+
+Route::fallback(function () {
+    return redirect(RouteServiceProvider::HOME);
 });

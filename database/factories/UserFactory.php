@@ -8,6 +8,8 @@ use Infrastructure\Persistence\Eloquent\Models\User;
 
 class UserFactory extends Factory
 {
+    protected $model = User::class;
+
     /**
      * Define the model's default state.
      *
@@ -33,20 +35,6 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'email_verified_at' => null,
-            ];
-        });
-    }
-
-    /**
-     * Define a state for creating an administrator with specific email and password.
-     */
-    public function admin(string $email, string $password): Factory
-    {
-        return $this->state(function (array $attributes) use ($email, $password) {
-            return [
-                'role' => User::ADMIN_USER_ROLE,
-                'email' => $email,
-                'password' => bcrypt($password),
             ];
         });
     }

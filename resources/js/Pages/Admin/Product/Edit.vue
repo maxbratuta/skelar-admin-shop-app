@@ -130,7 +130,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    axios.put(route('admin.api.products.update', { product: product.id }), form)
+    axios.put(route('admin.api.v1.products.update', { product: product.id }), form)
         .then(response => {
             message.value =  response.data.message;
 

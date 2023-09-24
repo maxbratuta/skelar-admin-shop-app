@@ -2,15 +2,16 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Notification;
 use Infrastructure\Persistence\Eloquent\Models\User;
 use Tests\TestCase;
 
 class PasswordResetTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_reset_password_link_screen_can_be_rendered()
     {
@@ -21,6 +22,8 @@ class PasswordResetTest extends TestCase
 
     public function test_reset_password_link_can_be_requested()
     {
+        $this->withoutMiddleware(VerifyCsrfToken::class);
+
         Notification::fake();
 
         $user = User::factory()->create();
@@ -32,6 +35,8 @@ class PasswordResetTest extends TestCase
 
     public function test_reset_password_screen_can_be_rendered()
     {
+        $this->withoutMiddleware(VerifyCsrfToken::class);
+
         Notification::fake();
 
         $user = User::factory()->create();
@@ -49,6 +54,8 @@ class PasswordResetTest extends TestCase
 
     public function test_password_can_be_reset_with_valid_token()
     {
+        $this->withoutMiddleware(VerifyCsrfToken::class);
+
         Notification::fake();
 
         $user = User::factory()->create();
