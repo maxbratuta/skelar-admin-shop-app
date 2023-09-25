@@ -19231,6 +19231,7 @@ __webpack_require__.r(__webpack_exports__);
       "default": 10
     }
   },
+  emits: ['update:perPage'],
   setup: function setup(__props, _ref) {
     var __expose = _ref.expose,
       emit = _ref.emit;
@@ -19240,11 +19241,19 @@ __webpack_require__.r(__webpack_exports__);
     var update = function update() {
       emit('update:perPage', selected.value);
     };
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      var urlParams = new URLSearchParams(window.location.search);
+      var urlPerPage = urlParams.get('per_page');
+      if (urlPerPage) {
+        selected.value = Number(urlPerPage);
+      }
+    });
     var __returned__ = {
       emit: emit,
       selected: selected,
       update: update,
-      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,

@@ -13,9 +13,9 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue';
+import { ref, onMounted, defineProps, defineEmits } from 'vue';
 
-const emit = defineEmits();
+const emit = defineEmits(['update:perPage']);
 
 const { perPage } = defineProps({
     perPage: {
@@ -29,4 +29,14 @@ const selected = ref(perPage);
 const update = () => {
     emit('update:perPage', selected.value);
 };
+
+onMounted(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const urlPerPage = urlParams.get('per_page');
+
+    if (urlPerPage) {
+        selected.value = Number(urlPerPage);
+    }
+});
 </script>
